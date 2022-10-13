@@ -16,10 +16,6 @@ describe Piece do
 
   let!(:direction_instance) { instance_double(Direction) }
 
-  before do
-    allow(Direction).to receive(:new).and_return(direction_instance)
-  end
-
   it 'creates new direction' do
     expect(subject).to be_an_instance_of(described_class)
   end
@@ -36,6 +32,7 @@ describe Piece do
 
   describe '#left' do
     before do
+      allow(Direction).to receive(:new).and_return(direction_instance)
       allow(direction_instance).to receive(:left!)
     end
 
@@ -47,12 +44,19 @@ describe Piece do
 
   describe '#right' do
     before do
+      allow(Direction).to receive(:new).and_return(direction_instance)
       allow(direction_instance).to receive(:right!)
     end
 
     it 'calls right in direction class' do
       subject.right
       expect(direction_instance).to have_received(:right!)
+    end
+  end
+
+  describe '#report' do
+    it 'returns the current piece status' do
+      expect(subject.report).to eq('0, 0, east, black')
     end
   end
 end
