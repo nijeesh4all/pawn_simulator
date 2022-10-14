@@ -24,7 +24,7 @@ describe Direction do
   describe '#left!' do
     it 'rotates the pawn to left' do
       subject.left!
-      expect(subject.direction).to eq(:south)
+      expect(subject.direction).to eq(:north)
     end
 
     context 'when direction is north' do
@@ -32,7 +32,7 @@ describe Direction do
 
       it 'rotate the pawn to face east' do
         subject.left!
-        expect(subject.direction).to eq(:east)
+        expect(subject.direction).to eq(:west)
       end
     end
   end
@@ -40,7 +40,7 @@ describe Direction do
   describe '#right!' do
     it 'rotates the pawn to left' do
       subject.right!
-      expect(subject.direction).to eq(:north)
+      expect(subject.direction).to eq(:south)
     end
 
     context 'when direction is north' do
@@ -48,7 +48,7 @@ describe Direction do
 
       it 'rotate the pawn to face west' do
         subject.right!
-        expect(subject.direction).to eq(:west)
+        expect(subject.direction).to eq(:east)
       end
     end
 
