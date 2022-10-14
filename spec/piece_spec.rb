@@ -16,7 +16,7 @@ describe Piece do
 
   let!(:direction_instance) { instance_double(Direction) }
 
-  it 'creates new direction' do
+  it 'creates new piece' do
     expect(subject).to be_an_instance_of(described_class)
   end
 
@@ -57,6 +57,15 @@ describe Piece do
   describe '#report' do
     it 'returns the current piece status' do
       expect(subject.report).to eq('0, 0, east, black')
+    end
+  end
+
+  describe '#move_to' do
+    it 'moved the piece to current location' do
+      expect {
+        subject.move_to(1, 2)
+      }.to change { subject.x }.from(0).to(1)
+       .and change { subject.y }.from(0).to(2)
     end
   end
 end

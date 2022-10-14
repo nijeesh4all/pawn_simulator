@@ -27,7 +27,26 @@ class Piece
     "#{x}, #{y}, #{direction_facing.direction}, #{color}"
   end
 
+  # @param [Integer] x
+  # @param [Integer] y
+  def valid_move?(x, y)
+    possible_moves
+      .any? { |possible_x, possible_y| possible_x == x && possible_y == y }
+  end
+
+  # @param [Object] x
+  # @param [Object] y
+  def move_to(x, y)
+    @x = x
+    @y = y
+  end
+
   private
+
+  # removes any obvious invalid moves like negative values
+  def possible_moves
+    all_moves.filter { |x, y| x >= 0 && y >= 0 }
+  end
 
   def color=(color)
     color = color.to_sym
