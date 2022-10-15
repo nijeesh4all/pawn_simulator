@@ -23,7 +23,7 @@ class PawnSimulatorSdtInAdapter
   def move(steps = 1)
     raise Errors::PawnIsNotPlacedError unless @placed
 
-    next_move_x, next_move_y = @pawn.next_move(steps)
+    next_move_x, next_move_y = @pawn.next_move(steps.to_i)
     move = Move.new(@board, @pawn, next_move_x, next_move_y)
     move.execute!
   end

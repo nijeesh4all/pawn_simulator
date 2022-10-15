@@ -1,8 +1,14 @@
+# frozen_string_literal: true
+
 require 'rainbow'
 
 require_relative './errors'
 
 class RunnerLogger
+
+  def initialize(verbose: false)
+    @verbose = verbose
+  end
 
   COMMANDS = {
     'help' => 'Shows this help message',
@@ -22,6 +28,10 @@ class RunnerLogger
     puts Rainbow(message).red
   end
 
+  def green(message)
+    puts Rainbow(message).green
+  end
+
   def show_unrecognized_message
     error 'Command not found. Type `help` for instructions on usage'
   end
@@ -35,7 +45,9 @@ class RunnerLogger
   end
 
   def handle_command_response(command)
-    puts yield
+    command_handler_method = command_response_name(command)
+    response = yield
+    send(command_handler_method, response)
   rescue ArgumentError => e
     error "Invalid arguments send to #{command}\n"
     show_help_message_for(command)
@@ -43,4 +55,37 @@ class RunnerLogger
     error e.message
   end
 
+  private
+
+  def command_response_name(command)
+    "show_#{command}_command_response"
+  end
+
+  def show_place_command_response(_)
+    return unless @verbose
+
+    info 'pawn placed'
+  end
+
+  def show_move_command_response(_)
+    return unless @verbose
+
+    info 'pawn moved'
+  end
+
+  def show_left_command_response(_)
+    return unless @verbose
+
+    info 'rotated left'
+  end
+
+  def show_right_command_response(_)
+    return unless @verbose
+
+    info 'rotated right'
+  end
+
+  def show_report_command_response(response)
+    green response
+  end
 end
