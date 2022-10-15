@@ -7,8 +7,8 @@ class Piece
       super
     end
 
-    def next_move
-      x_step, y_step = direction_facing.direction_vector
+    def next_move(steps = 1)
+      x_step, y_step = direction_facing.direction_vector(steps)
       [x + x_step, y + y_step]
     end
 
