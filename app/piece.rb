@@ -13,6 +13,7 @@ class Piece
     @y = start_y
     @direction_facing = Direction.new(start_dir.to_sym)
     self.color = color
+    @moved = false
   end
 
   def left
@@ -39,6 +40,11 @@ class Piece
   def move_to(x, y)
     @x = x
     @y = y
+    @moved = true
+  end
+
+  def has_moved?
+    @moved
   end
 
   private

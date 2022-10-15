@@ -68,4 +68,17 @@ describe Piece do
        .and change { subject.y }.from(0).to(2)
     end
   end
+
+  describe '#has_moved?' do
+    it 'returns false' do
+      expect(subject.has_moved?).to eq(false)
+    end
+
+    context 'if the piece has moved' do
+      it 'returns true' do
+        subject.move_to(1,1)
+        expect(subject.has_moved?).to eq(true)
+      end
+    end
+  end
 end
