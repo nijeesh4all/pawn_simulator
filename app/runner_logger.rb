@@ -1,5 +1,7 @@
 require 'rainbow'
 
+require_relative './errors'
+
 class RunnerLogger
 
   COMMANDS = {
@@ -25,10 +27,20 @@ class RunnerLogger
   end
 
   def show_help_message_for(command)
-    info command.ljust(10) + COMMANDS[command]
+    info command.upcase.ljust(10) + COMMANDS[command]
   end
 
   def show_help_message
     COMMANDS.each_key { |command| show_help_message_for(command) }
   end
+
+  def handle_command_response(command)
+    puts yield
+  rescue ArgumentError => e
+    error "Invalid arguments send to #{command}\n"
+    show_help_message_for(command)
+  rescue Errors::PawnSimulatorError => e
+    error e.message
+  end
+
 end
