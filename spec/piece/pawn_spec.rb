@@ -35,6 +35,27 @@ describe Piece::Pawn do
       end
     end
 
+    context 'when pawn is being moved for the first time' do
+
+      let(:location) { { x: 3, y: 3 } }
+
+      it 'is possible to move up 2 tiles' do
+        expect(subject.valid_move?(3, 5)).to eq(true)
+      end
+
+      it 'is possible to move down 2 tiles' do
+        expect(subject.valid_move?(3, 1)).to eq(true)
+      end
+
+      it 'is possible to move left 2 tiles' do
+        expect(subject.valid_move?(1, 3)).to eq(true)
+      end
+
+      it 'is possible to move right 2 tiles' do
+        expect(subject.valid_move?(5, 3)).to eq(true)
+      end
+    end
+
     context 'invalid moves' do
       let(:location) { { x: 0, y: 0 } }
 

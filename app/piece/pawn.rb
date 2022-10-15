@@ -5,7 +5,6 @@ class Piece
   class Pawn < Piece
     def initialize(start_x, start_y, start_dir, color)
       super
-      @moved = false
     end
 
     def next_move
@@ -17,6 +16,26 @@ class Piece
 
     # all the direction that the pawn can move in
     def all_moves
+      standard_moves + special_moves
+    end
+
+    protected
+
+    # the pawn has two types of moves based on weather it has touched or not
+    # if it hasn't been touched it can move 2 tiles as the first move
+    # after that only one tile at a time
+    def special_moves
+      return [] if has_moved?
+
+      [
+        [x - 2, y],
+        [x + 2, y],
+        [x, y + 2],
+        [x, y - 2]
+      ]
+    end
+
+    def standard_moves
       [
         [x - 1, y],
         [x + 1, y],
