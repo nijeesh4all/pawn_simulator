@@ -7,5 +7,6 @@ gem 'rainbow'
 group :development, :test do
   gem 'rubocop'
   gem 'rubocop-rspec'
+  gem 'byebug'
 end
 
