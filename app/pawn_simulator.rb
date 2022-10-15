@@ -34,7 +34,7 @@ class PawnSimulator
   private
 
   def exit
-    @logger.info 'Thank you for using simple_warehouse!'
+    @logger.info 'Thank you for using PawnSimulator!'
     @live = false
   end
 
